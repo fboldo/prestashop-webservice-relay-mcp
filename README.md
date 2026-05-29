@@ -12,10 +12,12 @@ It authenticates the same way as the PrestaShop Webservice examples, with the We
 curl -u YOUR_PRESTASHOP_WEBSERVICE_KEY: https://yourstore.com/api/
 ```
 
-## Install
+## Usage
+
+After the package is published, users can run the stdio MCP server with `npx`; no Bun install is required:
 
 ```bash
-bun install
+npx -y prestashop-webservice-relay-mcp --base-url https://yourstore.com --key YOUR_PRESTASHOP_WEBSERVICE_KEY
 ```
 
 ## Configuration
@@ -26,13 +28,13 @@ The server accepts the store base URL and Webservice key either as environment v
 export PRESTASHOP_BASE_URL="https://yourstore.com"
 export PRESTASHOP_WEBSERVICE_KEY="YOUR_PRESTASHOP_WEBSERVICE_KEY"
 
-bun run index.ts
+npx -y prestashop-webservice-relay-mcp
 ```
 
 Or:
 
 ```bash
-bun run index.ts --base-url https://yourstore.com --key YOUR_PRESTASHOP_WEBSERVICE_KEY
+npx -y prestashop-webservice-relay-mcp --base-url https://yourstore.com --key YOUR_PRESTASHOP_WEBSERVICE_KEY
 ```
 
 If you pass `https://yourstore.com`, the relay calls `https://yourstore.com/api`. Passing `https://yourstore.com/api` also works.
@@ -52,7 +54,7 @@ Optional environment variables:
 Launch the server with Streamable HTTP instead of stdio:
 
 ```bash
-bun run index.ts --transport http --host 127.0.0.1 --port 3000
+npx -y prestashop-webservice-relay-mcp --transport http --host 127.0.0.1 --port 3000
 ```
 
 The MCP endpoint is available at:
@@ -70,7 +72,7 @@ http://127.0.0.1:3000/health
 Equivalent environment-based launch:
 
 ```bash
-PRESTASHOP_MCP_TRANSPORT=http PORT=3000 bun run index.ts
+PRESTASHOP_MCP_TRANSPORT=http PORT=3000 npx -y prestashop-webservice-relay-mcp
 ```
 
 ## MCP Client Example
@@ -81,8 +83,8 @@ For a stdio MCP client, configure the command with your store credentials in the
 {
   "mcpServers": {
     "prestashop": {
-      "command": "bun",
-      "args": ["run", "/home/filipeboldo/Apps/prestashop-webservice-relay-mcp/index.ts"],
+      "command": "npx",
+      "args": ["-y", "prestashop-webservice-relay-mcp"],
       "env": {
         "PRESTASHOP_BASE_URL": "https://yourstore.com",
         "PRESTASHOP_WEBSERVICE_KEY": "YOUR_PRESTASHOP_WEBSERVICE_KEY"
@@ -130,8 +132,20 @@ Example PrestaShop list query arguments:
 
 ## Development
 
+Install project dependencies with Bun:
+
 ```bash
+bun install
+```
+
+```bash
+bun run format
+bun run check
 bun run typecheck
+bun run build
+bun run test
 bun run index.ts --help
 bun run start:http
 ```
+
+The project uses Biome for formatting/linting and Husky for the pre-commit hook. CI runs format checks, Biome checks, typechecking, build, and tests.
