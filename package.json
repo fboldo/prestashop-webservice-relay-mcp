@@ -1,6 +1,6 @@
 {
 	"name": "prestashop-webservice-relay-mcp",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "MCP relay server for PrestaShop Webservice v1.7+.",
 	"repository": {
 		"type": "git",
