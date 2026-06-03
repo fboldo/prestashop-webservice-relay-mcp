@@ -2,6 +2,18 @@
 	"name": "prestashop-webservice-relay-mcp",
 	"version": "0.1.1",
 	"description": "MCP relay server for PrestaShop Webservice v1.7+.",
+	"license": "MIT",
+	"keywords": [
+		"mcp",
+		"model-context-protocol",
+		"prestashop",
+		"prestashop-webservice",
+		"relay",
+		"api",
+		"ecommerce",
+		"agents",
+		"ai-agents"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/fboldo/prestashop-webservice-relay-mcp.git"
